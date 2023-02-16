@@ -1,0 +1,1 @@
+awk -F: 'NR > 1 {if (NR % 2 == 0) print $1 | "sort -r" | tr "\n" ", "}' /etc/passwd | awk -v line1="FT_LINE1" -v line2="FT_LINE2" '{split($0,a,", "); for (i in a) if (line1 <= a[i] && a[i] <= line2) b[++j]=a[i];} END {for (i=j; i; i--) printf b[i] ", "; printf ".";}'
